@@ -85,7 +85,12 @@
     .zoomable:hover {
       transform: scale(1.1);
     }
-  </style>
+  
+
+  to { transform: rotate(360deg); }
+}
+
+</style>
 </head>
 <body>
   <div class="confess" id="confessArea"></div>
@@ -145,6 +150,11 @@
   20% { opacity: 1; }
   100% { top: 100%; opacity: 0; }
 }
+
+
+  to { transform: rotate(360deg); }
+}
+
 </style>
 
 <script>
@@ -177,5 +187,34 @@
   });
 </script>
 
+<audio id="bgMusic" autoplay loop>
+  <source src="dung_lam_trai_tim_anh_dau.mp3" type="audio/mpeg">
+  Trình duyệt không hỗ trợ âm thanh.
+</audio>
+
+<script>
+  document.body.addEventListener("click", function () {
+    const music = document.getElementById("bgMusic");
+    if (music && music.paused) {
+      music.play().catch(err => console.log("Không thể phát nhạc:", err));
+    }
+  });
+</script>
+<script>
+  document.addEventListener("mousemove", (e) => {
+    const x = e.clientX / window.innerWidth;
+    const y = e.clientY / window.innerHeight;
+    document.body.style.backgroundPosition = `${50 + (x - 0.5) * 20}% ${50 + (y - 0.5) * 20}%`;
+  });
+
+  document.addEventListener("touchmove", (e) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      const x = touch.clientX / window.innerWidth;
+      const y = touch.clientY / window.innerHeight;
+      document.body.style.backgroundPosition = `${50 + (x - 0.5) * 20}% ${50 + (y - 0.5) * 20}%`;
+    }
+  }, { passive: true });
+</script>
 </body>
 </html>
